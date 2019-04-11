@@ -37,8 +37,11 @@ def main():
     rrresult = RRtest(dataset)
     pyomresult = PYOMtest(dataset)
     cimcresult = CIMCtest(dataset)
+    print("Race and Religion Results", file=open("merged.txt", "a"))
     print(rrresult, file=open("merged.txt", "a"))
+    print("Personal Interest Results", file=open("merged.txt", "a"))
     print(pyomresult, file=open("merged.txt", "a"))
+    print("Correlation Interest and Match Results", file=open("merged.txt", "a"))
     print(cimcresult, file=open("merged.txt", "a"))
 
 
