@@ -8,9 +8,6 @@ import pandas as pd
 
 def data():
     data = pd.read_csv('adjusted dataset.csv', delimiter=';')
-    # for i in range(1, len(data["gender"]) - 1):
-    #     if (data["gender"][i]) == 1:
-    #         print(data["gender"][i])
     return data
 
 
@@ -45,12 +42,6 @@ def RRtest(data):
     return result
 
 
-# Perceiving Yourself and Others Match
-def PYOMtest(data):
-    result = True
-    return result
-
-
 # Correlation Interest and Match Count
 def CIMCtest(data):
     extneg_match = 0
@@ -61,8 +52,8 @@ def CIMCtest(data):
     extpos_no_mat = 0
     pos_match = 0
     pos_no_mat = 0
-    result = []
-    result2 = []
+    result_match = []
+    result_no_match = []
 
     for i in range(1, len(data["int_corr"])):
         if (data["int_corr"][i] >= 0.5) and (data["match"][i] == 1):
@@ -82,15 +73,44 @@ def CIMCtest(data):
         elif (data["int_corr"][i] > -0.5) and (data["int_corr"][i] <= 0) and (data["match"][i] == 0):
             neg_no_mat += 1
 
-    result.append("No Match: Extreme Negative, Negative, Positive, Extreme Positive")
-    result2.append(extneg_no_mat)
-    result2.append(neg_no_mat)
-    result2.append(pos_no_mat)
-    result2.append(extpos_no_mat)
+    result_match.append(extneg_match)
+    result_match.append(neg_match)
+    result_match.append(pos_match)
+    result_match.append(extpos_match)
+    result_no_match.append(extneg_no_mat)
+    result_no_match.append(neg_no_mat)
+    result_no_match.append(pos_no_mat)
+    result_no_match.append(extpos_no_mat)
 
-    print(result)
-    print(result2)
-    return result, result2
+    print(result_match)
+    print(result_no_match)
+    return result_match, result_no_match
+
+
+# Perceiving Yourself and Others Match
+def PYOMtest(data):
+    # attractive attr3_1 and 5_1 and attr
+    high_simattr_match = 0
+    high_simattr_nomatch = 0
+    for i in range(1, len(data["attr3_1"])):
+
+    # sincere sinc3_1 and 5_1 and sinc
+    high_simsin_match = 0
+    high_simsin_nomatch = 0
+
+    # intelligent int3_1 and 5_1 and intel
+    high_simint_match = 0
+    high_simint_nomatch = 0
+
+    # fun fun3_1 and 5_1 fun
+    high_simfun_match = 0
+    high_simfun_nomatch = 0
+
+    # ambitious amb3_1 and 5_1 and amb
+    high_simamb_match = 0
+    high_simamb_nomatch = 0
+
+    return result
 
 
 def main():
@@ -100,11 +120,14 @@ def main():
     cimcresult, cimcresult2 = CIMCtest(dataset)
     print("Race and Religion Results", file=open("merged.txt", "a"))
     print(rrresult, file=open("merged.txt", "a"))
-    print("Personal Interest Results", file=open("merged.txt", "a"))
-    print(pyomresult, file=open("merged.txt", "a"))
+
     print("Correlation Interest and Match Results", file=open("merged.txt", "a"))
+    print("Match: Extreme Negative, Negative, Positive, Extreme Positive", file=open("merged.txt", "a"))
     print(cimcresult, file=open("merged.txt", "a"))
+    print("No Match: Extreme Negative, Negative, Positive, Extreme Positive", file=open("merged.txt", "a"))
     print(cimcresult2, file=open("merged.txt", "a"))
 
+    print("Personal Interest Results", file=open("merged.txt", "a"))
+    print(pyomresult, file=open("merged.txt", "a"))
 
 main()
