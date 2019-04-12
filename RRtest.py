@@ -53,21 +53,58 @@ def PYOMtest(data):
 
 # Correlation Interest and Match Count
 def CIMCtest(data):
-    result = True
-    return result
+    extneg_match = 0
+    extneg_no_mat = 0
+    neg_match = 0
+    neg_no_mat = 0
+    extpos_match = 0
+    extpos_no_mat = 0
+    pos_match = 0
+    pos_no_mat = 0
+    result = []
+    result2 = []
+
+    for i in range(1, len(data["int_corr"])):
+        if (data["int_corr"][i] >= 0.5) and (data["match"][i] == 1):
+            extpos_match += 1
+        elif (data["int_corr"][i] >= 0.5) and (data["match"][i] == 0):
+            extpos_no_mat += 1
+        elif (data["int_corr"][i] <= -0.5) and (data["match"][i] == 1):
+            extneg_match += 1
+        elif (data["int_corr"][i] <= -0.5) and (data["match"][i] == 0):
+            extneg_no_mat += 1
+        elif (data["int_corr"][i] < 0.5) and (data["int_corr"][i] > 0) and (data["match"][i] == 1):
+            pos_match += 1
+        elif (data["int_corr"][i] < 0.5) and (data["int_corr"][i] > 0) and (data["match"][i] == 0):
+            pos_no_mat += 1
+        elif (data["int_corr"][i] > -0.5) and (data["int_corr"][i] <= 0) and (data["match"][i] == 1):
+            neg_match += 1
+        elif (data["int_corr"][i] > -0.5) and (data["int_corr"][i] <= 0) and (data["match"][i] == 0):
+            neg_no_mat += 1
+
+    result.append("No Match: Extreme Negative, Negative, Positive, Extreme Positive")
+    result2.append(extneg_no_mat)
+    result2.append(neg_no_mat)
+    result2.append(pos_no_mat)
+    result2.append(extpos_no_mat)
+
+    print(result)
+    print(result2)
+    return result, result2
 
 
 def main():
     dataset = data()
     rrresult = RRtest(dataset)
     pyomresult = PYOMtest(dataset)
-    cimcresult = CIMCtest(dataset)
+    cimcresult, cimcresult2 = CIMCtest(dataset)
     print("Race and Religion Results", file=open("merged.txt", "a"))
     print(rrresult, file=open("merged.txt", "a"))
     print("Personal Interest Results", file=open("merged.txt", "a"))
     print(pyomresult, file=open("merged.txt", "a"))
     print("Correlation Interest and Match Results", file=open("merged.txt", "a"))
     print(cimcresult, file=open("merged.txt", "a"))
+    print(cimcresult2, file=open("merged.txt", "a"))
 
 
 main()
