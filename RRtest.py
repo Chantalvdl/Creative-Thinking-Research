@@ -100,15 +100,19 @@ def PYOMtest(data):
     high_simattr3_nomatch = 0
     high_simattr5_match = 0
     high_simattr5_nomatch = 0
-    print((abs(data["attr3_1"][1] - data["attr"][1]) <= 1))
+    list = (abs((data["attr3_1"][1]) - (data["attr"][1])) <= 1) and (data["match"] == 1)
+    list2 = (abs(data["attr3_1"][1] - data["attr"][1]) <= 1) and (data["match"] == 0)
+    list3 = (abs(data["attr5_1"][1] - data["attr"][1]) <= 1) and (data["match"] == 1)
+    list4 = (abs(data["attr5_1"][1] - data["attr"][i]) <= 1) and (data["match"] == 0)
+    print(list[0])
     for i in range(0, len(data["attr3_1"])):
-        if (abs(data["attr3_1"][i] - data["attr"][i]) <= 1) and (data["match"] == 1):
+        if list[i]:
             high_simattr3_match += 1
-        elif (abs(data["attr3_1"][i] - data["attr"][i]) <= 1) and (data["match"] == 0):
+        elif list2[i]:
             high_simattr3_nomatch += 1
-        elif (abs(data["attr5_1"][i] - data["attr"][i]) <= 1) and (data["match"] == 1):
+        elif list3[i]:
             high_simattr5_match += 1
-        elif (abs(data["attr5_1"][i] - data["attr"][i]) <= 1) and (data["match"] == 0):
+        elif list4[i]:
             high_simattr5_nomatch += 1
 
     # sincere sinc3_1 and 5_1 and sinc
@@ -116,8 +120,12 @@ def PYOMtest(data):
     high_simsin3_nomatch = 0
     high_simsin5_match = 0
     high_simsin5_nomatch = 0
+    list5 = (abs(data["sinc3_1"][1] - data["sinc"][i]) <= 1) and (data["match"][1] == 1)
+    list6 =
+    list7 =
+    list8 =
     for i in range(0, len(data["sinc3_1"])):
-        if (abs(data["sinc3_1"][i] - data["sinc"][i]) <= 1) and (data["match"] == 1):
+        if list5[i]:
             high_simsin3_match +=1
         elif (abs(data["sinc3_1"][i] - data["sinc"][i]) <= 1) and (data["match"] == 0):
             high_simsin3_nomatch += 1
