@@ -17,6 +17,10 @@ def RRtest(data):
     neg_race_neg_mat = 0
     neg_race_pos_mat = 0
     pos_race_neg_mat = 0
+    pos_rel_pos_mat = 0
+    neg_rel_neg_mat = 0
+    neg_rel_pos_mat = 0
+    pos_rel_neg_mat = 0
     result = []
 
     for i in range(0,len(data["samerace"])):
@@ -28,6 +32,15 @@ def RRtest(data):
             neg_race_pos_mat += 1
         elif (data["samerace"][i] == 1) and (data["match"][i] == 0):
             pos_race_neg_mat += 1
+    for i in range(0,len(data["imprelig"])):
+        if (data["imprelig"][i] >= 5.5) and (data["match"][i] == 1):
+            pos_rel_pos_mat += 1
+        elif (data["imprelig"][i] >= 5.5) and (data["match"][i] == 0):
+            pos_rel_neg_mat += 1
+        elif (data["imprelig"][i] < 5.5) and (data["match"][i] == 1):
+            neg_rel_pos_mat += 1
+        elif (data["imprelig"][i] < 5.5) and (data["match"][i] == 0):
+            neg_rel_neg_mat += 1
 
     result.append("PRPM  Result:")
     result.append(pos_race_pos_mat)
@@ -37,7 +50,14 @@ def RRtest(data):
     result.append(neg_race_pos_mat)
     result.append("PRNM  Result:")
     result.append(pos_race_neg_mat)
-
+    result.append("PRePM  Result:")
+    result.append(pos_rel_pos_mat)
+    result.append("NReNM  Result:")
+    result.append(neg_rel_neg_mat)
+    result.append("NRePM  Result:")
+    result.append(neg_rel_pos_mat)
+    result.append("PReNM  Result:")
+    result.append(pos_rel_neg_mat)
     print(result)
     return result
 
