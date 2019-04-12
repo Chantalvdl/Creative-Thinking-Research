@@ -121,17 +121,17 @@ def PYOMtest(data):
     high_simsin5_match = 0
     high_simsin5_nomatch = 0
     list5 = (abs(data["sinc3_1"][1] - data["sinc"][i]) <= 1) and (data["match"][1] == 1)
-    list6 =
-    list7 =
-    list8 =
+    list6 = (abs(data["sinc3_1"][i] - data["sinc"][i]) <= 1) and (data["match"] == 0)
+    list7 = (abs(data["sinc5_1"][i] - data["sinc"][i]) == 1) and (data["match"] == 1)
+    list8 = (abs(data["sinc5_1"][i] - data["sinc"][i]) == 1) and (data["match"] == 0)
     for i in range(0, len(data["sinc3_1"])):
         if list5[i]:
             high_simsin3_match +=1
-        elif (abs(data["sinc3_1"][i] - data["sinc"][i]) <= 1) and (data["match"] == 0):
+        elif list6[i]:
             high_simsin3_nomatch += 1
-        elif (abs(data["sinc5_1"][i] - data["sinc"][i]) == 1) and (data["match"] == 1):
+        elif list7[i]:
             high_simsin5_match += 1
-        elif (abs(data["sinc5_1"][i] - data["sinc"][i]) == 1) and (data["match"] == 0):
+        elif list8[i]:
             high_simsin5_nomatch += 1
 
     # intelligent int3_1 and 5_1 and intel
@@ -139,14 +139,18 @@ def PYOMtest(data):
     high_simint3_nomatch = 0
     high_simint5_match = 0
     high_simint5_nomatch = 0
+    list9 = (abs(data["int3_1"][i] - data["intel"][i]) == 1) and (data["match"] == 1)
+    list10 = (abs(data["int3_1"][i] - data["intel"][i]) == 1) and (data["match"] == 0)
+    list11 = (abs(data["int5_1"][i] - data["intel"][i]) == 1) and (data["match"] == 1)
+    list12 = (abs(data["int5_1"] - data["intel"]) == 1) and (data["match"] == 0)
     for i in range(0, len(data["int3_1"])):
-        if (abs(data["int3_1"][i] - data["intel"][i]) == 1) and (data["match"] == 1):
+        if list9[i]:
             high_simint3_match +=1
-        elif (abs(data["int3_1"][i] - data["intel"][i]) == 1) and (data["match"] == 0):
+        elif list10[i]:
             high_simint3_nomatch += 1
-        elif (abs(data["int5_1"][i] - data["intel"][i]) == 1) and (data["match"] == 1):
+        elif list11[i]:
             high_simint5_match += 1
-        elif (abs(data["int5_1"] - data["intel"]) == 1) and (data["match"] == 0):
+        elif list12[i]:
             high_simint5_nomatch += 1
 
     # fun fun3_1 and 5_1 fun
